@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes, BrowserRouter, HashRouter } from 'react-router-dom';
+import { Route, Routes, HashRouter } from 'react-router-dom';
 import Calendar from './components/Calendar';
 
 function App() {
