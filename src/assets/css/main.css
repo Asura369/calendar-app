@@ -26,6 +26,20 @@
   margin-left: auto;
 }
 
+.small-button {
+  padding: 6px 10px;
+  margin: 3px;
+  background-color: #f2f2f2;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.small-button:hover {
+  background-color: #e4e4e4;
+}
+
+
 .button.add-all-over-div {
   top: 0;
   right: 0;
@@ -132,18 +146,6 @@
   margin-right: 10px;
 }
 
-.todo-input button {
-  padding: 8px 16px;
-  background-color: #f2f2f2;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.todo-input button:hover {
-  background-color: #e4e4e4;
-}
-
 .todo-items {
   list-style-type: none;
   padding: 0;
@@ -166,15 +168,27 @@
   text-decoration: line-through;
 }
 
-.todo-actions button {
-  padding: 8px 16px;
-  background-color: #f2f2f2;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: 10px;
+.cancel-icon {
+  width: 18px;
+  height: 18px;
 }
 
-.todo-actions button:hover {
-  background-color: #e4e4e4;
+.add-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.delete-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.toggle-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.add-icon {
+  width: 18px;
+  height: 18px;
 }

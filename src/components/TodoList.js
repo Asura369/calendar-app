@@ -1,4 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
+import deleteIcon from '../assets/images/deleteIcon.svg';
+import toggleIcon from '../assets/images/toggleIcon.svg';
+import addIcon from '../assets/images/addIcon.svg';
+import cancelIcon from '../assets/images/cancelIcon.svg';
+import checkIcon from '../assets/images/checkIcon.svg';
+
 
 function TodoList() {
     // Define state variables
@@ -72,7 +78,9 @@ function TodoList() {
             <div className="todo-header">
                 <h2>Todo</h2>
                 <button className="button add" onClick={toggleInputFieldVisibility}>
-                    {inputVisibility ? 'Cancel' : '+'}
+                    {inputVisibility ? 
+                        <img src={cancelIcon} alt="Cancel" className="cancel-icon"/> : 
+                        <img src={addIcon} alt="Add" className="add-icon"/>}
                 </button>
             </div>
             <ul className="todo-items">
@@ -81,8 +89,13 @@ function TodoList() {
                     <li key={todo.id} className={`todo-item ${todo.completed ? 'completed' : ''}`}>
                         <span>{todo.text}</span>
                         <div>
-                            <button className="button" onClick={() => toggleTodo(todo.id)}>Toggle</button>
-                            <button className="button" onClick={() => deleteTodo(todo.id)}>Delete</button>
+                            <button className="small-button" onClick={() => toggleTodo(todo.id)}>
+                                <img src={toggleIcon} alt="Toggle" className="toggle-icon"/>
+                            </button>
+                            <button className="small-button" onClick={() => deleteTodo(todo.id)}>
+                                <img src={deleteIcon} alt="Delete" className="delete-icon"/>
+                            </button>
+
                         </div>
                     </li>
                 ))}
@@ -99,7 +112,9 @@ function TodoList() {
                         placeholder="Add a new todo"
                         ref={inputRef} // Assign the reference to the input element
                     />
-                    <button onClick={addTodo}>Add</button>
+                    <button className="button" onClick={addTodo}>
+                        <img src={checkIcon} alt="Check" className="add-icon"/>
+                    </button>
                 </div>
             )}
             {/* Button to toggle input field visibility all over the div */}

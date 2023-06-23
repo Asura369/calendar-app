@@ -43,9 +43,9 @@ function Calendar() {
 
         // Add row for days of the week
         const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-        for (let i = 0; i < 7; i++) {
-            calendarDays.push(<div key={weekdays[i]} className='weekday'>{weekdays[i]}</div>);
-        }
+        weekdays.map(day => {
+            calendarDays.push(<div key={day} className="weekday">{day}</div>);
+        });
 
         // Add empty cells for days before the first day of the month
         for (let i = 0; i < firstDayOfMonth; i++) {
