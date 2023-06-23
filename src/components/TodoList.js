@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 function TodoList() {
     // Define state variables
     const [todos, setTodos] = useState([]); // Array to store todos
     const [inputVisibility, setInputVisibility] = useState(false); // Boolean to control input field visibility
     const [inputValue, setInputValue] = useState(''); // String to store input field value
+    const inputRef = useRef(null); // Create a reference to the input element
 
     // Toggle input field visibility
     const toggleInputFieldVisibility = () => {
@@ -51,10 +52,17 @@ function TodoList() {
         setTodos(updatedTodos);
     };
 
+    // Focus on the input field when it becomes visible
+    useEffect(() => {
+        if (inputVisibility) {
+            inputRef.current.focus();
+        }
+    }, [inputVisibility]);
+
     return (
         <div className="todo-list">
             <div className="todo-header">
-                <h2>Todo List</h2>
+                <h2>Todo</h2>
                 <button className="button add" onClick={toggleInputFieldVisibility}>
                     {inputVisibility ? 'Cancel' : '+'}
                 </button>
@@ -80,11 +88,12 @@ function TodoList() {
                         value={inputValue}
                         onChange={updateInputValue}
                         placeholder="Add a new todo"
+                        ref={inputRef} // Assign the reference to the input element
                     />
                     <button onClick={addTodo}>Add</button>
                 </div>
             )}
-            {/* Button to toggle input field visibility all over the div*/}
+            {/* Button to toggle input field visibility all over the div */}
             <button className="button add-all-over-div" onClick={toggleInputFieldVisibility}></button>
         </div>
     );
