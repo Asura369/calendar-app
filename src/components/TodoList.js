@@ -59,6 +59,14 @@ function TodoList() {
         }
     }, [inputVisibility]);
 
+    // Allows enter key to be used to add todo
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            addTodo();
+        }
+    };
+
     return (
         <div className="todo-list">
             <div className="todo-header">
@@ -87,6 +95,7 @@ function TodoList() {
                         type="text"
                         value={inputValue}
                         onChange={updateInputValue}
+                        onKeyDown={handleKeyDown}
                         placeholder="Add a new todo"
                         ref={inputRef} // Assign the reference to the input element
                     />
