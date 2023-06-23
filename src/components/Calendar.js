@@ -42,7 +42,7 @@ function Calendar() {
         const calendarDays = [];
 
         // Add row for days of the week
-        const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         for (let i = 0; i < 7; i++) {
             calendarDays.push(<div key={weekdays[i]} className='weekday'>{weekdays[i]}</div>);
         }
@@ -63,19 +63,18 @@ function Calendar() {
     };
 
     return (
-        <div>
-            <h1>Calendar</h1>
+        <div className="calendar">
             <div className="calendar-header">
                 <button className="button previous-month" onClick={goToPreviousMonth}>Previous Month</button>
                 <h2>{accessDate.toLocaleString('default', { month: 'long', year: 'numeric' })}</h2>
                 <button className="button next-month" onClick={goToNextMonth}>Next Month</button>
             </div>
-            <br></br>
             <div className="calendar-grid">
                 {renderCalendarGrid()}
             </div>
         </div>
     );
+      
 }
 
 export default Calendar;
