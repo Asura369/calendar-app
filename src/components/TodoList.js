@@ -107,6 +107,25 @@ function TodoList() {
         return formattedTime + ' ' + suffix;
     };
 
+    // Order todos by due date and time
+    const orderedTodos = todos.slice().sort((a, b) => {
+        if (!a.dueDate && !b.dueDate) {
+            // Sort alphabetically if both todos don't have due date
+            return a.text.localeCompare(b.text);
+        } else if (!a.dueDate) {
+            // Todo without due date should be after the one with due date
+            return 1;
+        } else if (!b.dueDate) {
+            // Todo without due date should be after the one with due date
+            return -1;
+        } else {
+            // Sort by due date and time if both todos have due date
+            const dateA = new Date(a.dueDate + ' ' + a.dueTime);
+            const dateB = new Date(b.dueDate + ' ' + b.dueTime);
+            return dateA - dateB;
+        }
+    });
+  
     return (
         <div className="todo-list">
             <div className="todo-header">
@@ -122,7 +141,7 @@ function TodoList() {
 
             <ul className="todo-items">
                 {/* Render todos as list items */}
-                {todos.map((todo) => (
+                {orderedTodos.map((todo) => (
                     <li key={todo.id} className={`todo-item ${todo.completed ? 'completed' : ''}`}>
                         <span>
                             {todo.text}
