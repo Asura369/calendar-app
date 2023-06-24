@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import deleteIcon from '../assets/images/deleteIcon.svg';
-import toggleIcon from '../assets/images/toggleIcon.svg';
+import toggleLeftIcon from '../assets/images/toggleLeftIcon.svg';
+import toggleRightIcon from '../assets/images/toggleRightIcon.svg';
 import addIcon from '../assets/images/addIcon.svg';
 import cancelIcon from '../assets/images/cancelIcon.svg';
 import checkIcon from '../assets/images/checkIcon.svg';
@@ -89,7 +90,10 @@ function TodoList() {
                         <span>{todo.text}</span>
                         <div>
                             <button className="small-button" onClick={() => toggleTodo(todo.id)}>
-                                <img src={toggleIcon} alt="Toggle" className="toggle-icon" />
+                                {todo.completed ? 
+                                    (<img src={toggleRightIcon} alt="toggleRight" className="toggle-icon" />) : 
+                                    (<img src={toggleLeftIcon} alt="toggleLeft" className="toggle-icon" />
+                                    )}
                             </button>
                             <button className="small-button" onClick={() => deleteTodo(todo.id)}>
                                 <img src={deleteIcon} alt="Delete" className="delete-icon" />
@@ -98,6 +102,7 @@ function TodoList() {
                     </li>
                 ))}
             </ul>
+
             {/* Render input field if inputVisibility is true */}
             {inputVisibility && (
                 <div className="todo-input">

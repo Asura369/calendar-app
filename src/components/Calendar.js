@@ -66,13 +66,16 @@ function Calendar() {
         <div className="calendar">
             <div className="calendar-header">
                 <button className="button previous-month" onClick={goToPreviousMonth}>Previous Month</button>
-                <h2>{accessDate.toLocaleString('default', { month: 'long', year: 'numeric' })}</h2>
+                <div className="fixed-h2-container">
+                    <h2>{accessDate.toLocaleString('default', { month: 'long', year: 'numeric' })}</h2>
+                </div>
                 <button className="button next-month" onClick={goToNextMonth}>Next Month</button>
             </div>
             <div className="calendar-grid">
                 {renderCalendarGrid()}
             </div>
         </div>
+
     );
       
 }
