@@ -34,7 +34,6 @@ function TodoList() {
             };
             setTodos([...todos, newTodo]);
             setInputValue('');
-            toggleInputFieldVisibility();
         }
     };
 
@@ -76,7 +75,7 @@ function TodoList() {
     return (
         <div className="todo-list">
             <div className="todo-header">
-                <h2>Todo</h2>
+                <h2>{todos.length} Todos</h2>
                 <button className="button add" onClick={toggleInputFieldVisibility}>
                     {inputVisibility ? 
                         <img src={cancelIcon} alt="Cancel" className="cancel-icon" /> : 
