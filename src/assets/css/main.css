@@ -39,7 +39,6 @@
   background-color: #e4e4e4;
 }
 
-
 .button.add-all-over-div {
   top: 0;
   right: 0;
@@ -57,11 +56,13 @@
 
 .calendar-container {
   display: flex;
-  gap: 20px; /* Add gap between calendar and todo list */
+  gap: 20px;
+  /* Add gap between calendar and todo list */
 }
 
 .calendar {
-  flex: 75%; /* Adjust width of the calendar */
+  flex: 75%;
+  /* Adjust width of the calendar */
   padding: 20px;
   border-radius: 5px;
 }
@@ -125,8 +126,8 @@
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  overflow: auto;
 }
-
 
 .todo-header {
   display: flex;

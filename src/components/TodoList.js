@@ -79,8 +79,8 @@ function TodoList() {
                 <h2>Todo</h2>
                 <button className="button add" onClick={toggleInputFieldVisibility}>
                     {inputVisibility ? 
-                        <img src={cancelIcon} alt="Cancel" className="cancel-icon"/> : 
-                        <img src={addIcon} alt="Add" className="add-icon"/>}
+                        <img src={cancelIcon} alt="Cancel" className="cancel-icon" /> : 
+                        <img src={addIcon} alt="Add" className="add-icon" />}
                 </button>
             </div>
             <ul className="todo-items">
@@ -90,12 +90,11 @@ function TodoList() {
                         <span>{todo.text}</span>
                         <div>
                             <button className="small-button" onClick={() => toggleTodo(todo.id)}>
-                                <img src={toggleIcon} alt="Toggle" className="toggle-icon"/>
+                                <img src={toggleIcon} alt="Toggle" className="toggle-icon" />
                             </button>
                             <button className="small-button" onClick={() => deleteTodo(todo.id)}>
-                                <img src={deleteIcon} alt="Delete" className="delete-icon"/>
+                                <img src={deleteIcon} alt="Delete" className="delete-icon" />
                             </button>
-
                         </div>
                     </li>
                 ))}
@@ -113,7 +112,7 @@ function TodoList() {
                         ref={inputRef} // Assign the reference to the input element
                     />
                     <button className="button" onClick={addTodo}>
-                        <img src={checkIcon} alt="Check" className="add-icon"/>
+                        <img src={checkIcon} alt="Check" className="add-icon" />
                     </button>
                 </div>
             )}
