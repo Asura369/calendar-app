@@ -52,6 +52,7 @@ function TodoList() {
             setInputValue('');
             setDueDate('');
             setDueTime('');
+            inputRef.current.focus(); // Focus on the input field after adding a todo
         }
     };
 
@@ -144,6 +145,10 @@ function TodoList() {
                         ref={inputRef} // Assign the reference to the input element
                     />
 
+                    <button className="small-button" onClick={addTodo}> 
+                        <img src={checkIcon} alt="Check" className="add-icon" />
+                    </button>
+
                     {/* Input field for due date */}
                     <input
                         type="date"
@@ -159,10 +164,6 @@ function TodoList() {
                         onChange={updateDueTime}
                         placeholder="Due time"
                     />
-
-                    <button className="button" onClick={addTodo}>
-                        <img src={checkIcon} alt="Check" className="add-icon" />
-                    </button>
 
                 </div>
             )}
