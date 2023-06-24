@@ -32,7 +32,7 @@ function TodoList() {
     const updateDueDate = (e) => {
         setDueDate(e.target.value);
     };
-  
+
     // Update due time
     const updateDueTime = (e) => {
         setDueTime(e.target.value);
@@ -46,7 +46,7 @@ function TodoList() {
                 text: inputValue,
                 completed: false,
                 dueDate: dueDate,
-                dueTime: dueTime,
+                dueTime: dueDate && !dueTime ? '11:59 PM' : formatTime(dueTime), // Set default due time to "11:59 PM" if due date is entered and due time is empty
             };
             setTodos([...todos, newTodo]);
             setInputValue('');
@@ -91,9 +91,24 @@ function TodoList() {
         }
     };
 
+    // Format time in 12-hour format
+    const formatTime = (time) => {
+        const [hours, minutes] = time.split(':');
+        let formattedTime = '';
+        let suffix = 'AM';
+
+        if (hours >= 12) {
+            formattedTime = `${hours % 12}:${minutes}`;
+            suffix = 'PM';
+        } else {
+            formattedTime = `${hours}:${minutes}`;
+        }
+
+        return formattedTime + ' ' + suffix;
+    };
+
     return (
         <div className="todo-list">
-            
             <div className="todo-header">
                 <h2>{todos.length} Todos</h2>
                 <button className="button add" onClick={toggleInputFieldVisibility}>
@@ -109,10 +124,13 @@ function TodoList() {
                 {/* Render todos as list items */}
                 {todos.map((todo) => (
                     <li key={todo.id} className={`todo-item ${todo.completed ? 'completed' : ''}`}>
-                        <span>{todo.text} 
-                            <br /> 
+                        <span>
+                            {todo.text}
+                            <br />
                             {todo.dueDate && todo.dueTime && (
-                                <span className="due-info">{todo.dueDate} {todo.dueTime}</span>
+                                <span className="due-info">
+                                    {todo.dueDate} {todo.dueTime}
+                                </span>
                             )}
                         </span>
                         <div>
@@ -134,7 +152,6 @@ function TodoList() {
             {/* Render input field if inputVisibility is true */}
             {inputVisibility && (
                 <div className="todo-input">
-
                     {/* Input field for adding a new todo */}
                     <input
                         type="text"
@@ -145,32 +162,20 @@ function TodoList() {
                         ref={inputRef} // Assign the reference to the input element
                     />
 
-                    <button className="small-button" onClick={addTodo}> 
+                    <button className="small-button" onClick={addTodo}>
                         <img src={checkIcon} alt="Check" className="add-icon" />
                     </button>
 
                     {/* Input field for due date */}
-                    <input
-                        type="date"
-                        value={dueDate}
-                        onChange={updateDueDate}
-                        placeholder="Due date"
-                    />
+                    <input type="date" value={dueDate} onChange={updateDueDate} placeholder="Due date" />
 
                     {/* Input field for due time */}
-                    <input
-                        type="time"
-                        value={dueTime}
-                        onChange={updateDueTime}
-                        placeholder="Due time"
-                    />
-
+                    <input type="time" value={dueTime} onChange={updateDueTime} placeholder="Due time" />
                 </div>
             )}
 
             {/* Button to toggle input field visibility all over the div */}
             <button className="button add-all-over-div" onClick={toggleInputFieldVisibility}></button>
-
         </div>
     );
 }
