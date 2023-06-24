@@ -184,6 +184,12 @@
   text-decoration-thickness: 1px;
 }
 
+.due-info {
+  font-size: 12px;
+  color: gray;
+  margin-top: 4px;
+}
+
 .cancel-icon {
   width: 18px;
   height: 18px;

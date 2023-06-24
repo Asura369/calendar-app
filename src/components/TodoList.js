@@ -6,23 +6,36 @@ import addIcon from '../assets/images/addIcon.svg';
 import cancelIcon from '../assets/images/cancelIcon.svg';
 import checkIcon from '../assets/images/checkIcon.svg';
 
-
 function TodoList() {
     // Define state variables
     const [todos, setTodos] = useState([]); // Array to store todos
     const [inputVisibility, setInputVisibility] = useState(false); // Boolean to control input field visibility
     const [inputValue, setInputValue] = useState(''); // String to store input field value
+    const [dueDate, setDueDate] = useState(''); // String to store due date
+    const [dueTime, setDueTime] = useState(''); // String to store due time
     const inputRef = useRef(null); // Create a reference to the input element
 
     // Toggle input field visibility
     const toggleInputFieldVisibility = () => {
         setInputVisibility(!inputVisibility);
-        setInputValue(''); // resets input value when invisible 
+        setInputValue(''); // Resets input value when invisible
+        setDueDate(''); // Resets due date when invisible
+        setDueTime(''); // Resets due time when invisible
     };
 
     // Update input field value
     const updateInputValue = (e) => {
         setInputValue(e.target.value);
+    };
+
+    // Update due date
+    const updateDueDate = (e) => {
+        setDueDate(e.target.value);
+    };
+  
+    // Update due time
+    const updateDueTime = (e) => {
+        setDueTime(e.target.value);
     };
 
     // Add a new todo to the list
@@ -32,9 +45,13 @@ function TodoList() {
                 id: new Date().getTime(),
                 text: inputValue,
                 completed: false,
+                dueDate: dueDate,
+                dueTime: dueTime,
             };
             setTodos([...todos, newTodo]);
             setInputValue('');
+            setDueDate('');
+            setDueTime('');
         }
     };
 
@@ -75,25 +92,35 @@ function TodoList() {
 
     return (
         <div className="todo-list">
+            
             <div className="todo-header">
                 <h2>{todos.length} Todos</h2>
                 <button className="button add" onClick={toggleInputFieldVisibility}>
-                    {inputVisibility ? 
-                        <img src={cancelIcon} alt="Cancel" className="cancel-icon" /> : 
-                        <img src={addIcon} alt="Add" className="add-icon" />}
+                    {inputVisibility ? (
+                        <img src={cancelIcon} alt="Cancel" className="cancel-icon" />
+                    ) : (
+                        <img src={addIcon} alt="Add" className="add-icon" />
+                    )}
                 </button>
             </div>
+
             <ul className="todo-items">
                 {/* Render todos as list items */}
                 {todos.map((todo) => (
                     <li key={todo.id} className={`todo-item ${todo.completed ? 'completed' : ''}`}>
-                        <span>{todo.text}</span>
+                        <span>{todo.text} 
+                            <br /> 
+                            {todo.dueDate && todo.dueTime && (
+                                <span className="due-info">{todo.dueDate} {todo.dueTime}</span>
+                            )}
+                        </span>
                         <div>
                             <button className="small-button" onClick={() => toggleTodo(todo.id)}>
-                                {todo.completed ? 
-                                    (<img src={toggleRightIcon} alt="toggleRight" className="toggle-icon" />) : 
-                                    (<img src={toggleLeftIcon} alt="toggleLeft" className="toggle-icon" />
-                                    )}
+                                {todo.completed ? (
+                                    <img src={toggleRightIcon} alt="toggleRight" className="toggle-icon" />
+                                ) : (
+                                    <img src={toggleLeftIcon} alt="toggleLeft" className="toggle-icon" />
+                                )}
                             </button>
                             <button className="small-button" onClick={() => deleteTodo(todo.id)}>
                                 <img src={deleteIcon} alt="Delete" className="delete-icon" />
@@ -106,6 +133,7 @@ function TodoList() {
             {/* Render input field if inputVisibility is true */}
             {inputVisibility && (
                 <div className="todo-input">
+
                     {/* Input field for adding a new todo */}
                     <input
                         type="text"
@@ -115,13 +143,33 @@ function TodoList() {
                         placeholder="Add a new todo"
                         ref={inputRef} // Assign the reference to the input element
                     />
+
+                    {/* Input field for due date */}
+                    <input
+                        type="date"
+                        value={dueDate}
+                        onChange={updateDueDate}
+                        placeholder="Due date"
+                    />
+
+                    {/* Input field for due time */}
+                    <input
+                        type="time"
+                        value={dueTime}
+                        onChange={updateDueTime}
+                        placeholder="Due time"
+                    />
+
                     <button className="button" onClick={addTodo}>
                         <img src={checkIcon} alt="Check" className="add-icon" />
                     </button>
+
                 </div>
             )}
+
             {/* Button to toggle input field visibility all over the div */}
             <button className="button add-all-over-div" onClick={toggleInputFieldVisibility}></button>
+
         </div>
     );
 }
