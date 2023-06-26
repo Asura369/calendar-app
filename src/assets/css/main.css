@@ -91,9 +91,14 @@
   background-color: #dcdcdc;
 }
 
+.day-number {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
 .calendar-day {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
   justify-content: flex-start;
   height: 11.111vh;
   /* 1/9 of viewport height */
@@ -102,6 +107,7 @@
   cursor: pointer;
   padding: 5px;
   box-sizing: border-box;
+  overflow-y: auto; /* Add vertical scrollbars when necessary */
 }
 
 .calendar-day:nth-child(7n+1),
@@ -120,6 +126,14 @@
 
 .calendar-day.current-date {
   background-color: #ff9999;
+}
+
+.calendar-day.todos {
+  background-color: #e0e0e0;
+  font-size: x-small;
+  margin: 1px;
+  min-height: 30px;
+  text-overflow: clip;
 }
 
 .todo-list {

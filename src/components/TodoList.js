@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import deleteIcon from '../assets/images/deleteIcon.svg';
 import toggleLeftIcon from '../assets/images/toggleLeftIcon.svg';
 import toggleRightIcon from '../assets/images/toggleRightIcon.svg';
@@ -6,9 +7,8 @@ import addIcon from '../assets/images/addIcon.svg';
 import cancelIcon from '../assets/images/cancelIcon.svg';
 import checkIcon from '../assets/images/checkIcon.svg';
 
-function TodoList() {
+function TodoList({ todos, setTodos }) {
     // Define state variables
-    const [todos, setTodos] = useState([]); // Array to store todos
     const [inputVisibility, setInputVisibility] = useState(false); // Boolean to control input field visibility
     const [inputValue, setInputValue] = useState(''); // String to store input field value
     const [dueDate, setDueDate] = useState(''); // String to store due date
@@ -198,5 +198,10 @@ function TodoList() {
         </div>
     );
 }
+
+TodoList.propTypes = {
+    todos: PropTypes.array.isRequired,
+    setTodos: PropTypes.func.isRequired,
+};
 
 export default TodoList;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-function Calendar() {
+function Calendar({ todos }) {
     const [accessDate, setAccessDate] = useState(new Date());
 
     const goToPreviousMonth = () => {
@@ -38,27 +39,42 @@ function Calendar() {
         const month = accessDate.getMonth();
         const daysInMonth = getDaysInMonth(year, month);
         const firstDayOfMonth = getFirstDayOfMonth(year, month);
-
+    
         const calendarDays = [];
-
+    
         // Add row for days of the week
         const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         weekdays.map(day => {
             calendarDays.push(<div key={day} className="weekday">{day}</div>);
         });
-
+    
         // Add empty cells for days before the first day of the month
         for (let i = 0; i < firstDayOfMonth; i++) {
             calendarDays.push(<div key={`empty-${i}`} className="calendar-day empty"></div>);
         }
-
+    
         // Add cells for each day of the month
         for (let day = 1; day <= daysInMonth; day++) {
             const CurrentDate = isCurrentDate(year, month, day);
             const classNames = `calendar-day ${CurrentDate ? 'current-date' : ''}`;
-            calendarDays.push(<div key={day} className={classNames}>{day}</div>);
-        }
+            
+            const monthValue = (month + 1 < 10) ? `0${month + 1}` : `${month + 1}`;
+            const dayValue = (day < 10) ? `0${day}` : `${day}`;
+            const dayId = `${year}-${monthValue}-${dayValue}`;
 
+            const todosForDay = todos.filter(todo => todo.dueDate === dayId);
+    
+            calendarDays.push(
+                <div id={dayId} key={dayId} className={classNames}>
+                    <div className="day-number">{day}</div>
+                    {todosForDay.map(todo => (
+                        <button key={todo.id} className="calendar-day todos">{todo.text}</button>
+                    ))}
+                </div>
+            );
+              
+        }
+    
         return calendarDays;
     };
 
@@ -79,5 +95,15 @@ function Calendar() {
     );
       
 }
+
+Calendar.propTypes = {
+    todos: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            text: PropTypes.string.isRequired,
+            dueDate: PropTypes.string
+        })
+    ).isRequired
+};
 
 export default Calendar;
