@@ -151,7 +151,13 @@
 }
 
 .todo-input {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 10px;
+}
+
+.todo-input-flex {
+  display: flex;
 }
 
 .todo-input input {

@@ -172,24 +172,28 @@ function TodoList({ todos, setTodos }) {
             {inputVisibility && (
                 <div className="todo-input">
                     {/* Input field for adding a new todo */}
-                    <input
-                        type="text"
-                        value={inputValue}
-                        onChange={updateInputValue}
-                        onKeyDown={handleKeyDown}
-                        placeholder="Add a new todo"
-                        ref={inputRef} // Assign the reference to the input element
-                    />
+                    <div className="todo-input-flex">
+                        <input
+                            type="text"
+                            value={inputValue}
+                            onChange={updateInputValue}
+                            onKeyDown={handleKeyDown}
+                            placeholder="Add a new todo"
+                            ref={inputRef} // Assign the reference to the input element
+                        />
 
-                    <button className="small-button" onClick={addTodo}>
-                        <img src={checkIcon} alt="Check" className="add-icon" />
-                    </button>
+                        <button className="small-button" onClick={addTodo}>
+                            <img src={checkIcon} alt="Check" className="add-icon" />
+                        </button>
+                    </div>
 
-                    {/* Input field for due date */}
-                    <input type="date" value={dueDate} onChange={updateDueDate} placeholder="Due date" />
+                    <div className="todo-input-flex">
+                        {/* Input field for due date */}
+                        <input type="date" value={dueDate} onChange={updateDueDate} placeholder="Due date" />
 
-                    {/* Input field for due time */}
-                    <input type="time" value={dueTime} onChange={updateDueTime} placeholder="Due time" />
+                        {/* Input field for due time */}
+                        <input type="time" value={dueTime} onChange={updateDueTime} placeholder="Due time" />
+                    </div>
                 </div>
             )}
 
